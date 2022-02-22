@@ -1,0 +1,28 @@
+name: Build master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 11
+      - name: Build & Deploy
+        shell: bash
+        run: |
+          export GIT_COMMIT_DATE=$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M')
+          mvn versions:set -DnewVersion=${GITHUB_SHA::8}_${GIT_COMMIT_DATE} --batch-mode
+          mvn deploy --batch-mode -DdeployAtEnd=true -Dmaven.wagon.http.pool=false source:jar-no-fork --settings .github/maven-settings.xml
+        env:
+          GITHUB_USERNAME: x-access-token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
