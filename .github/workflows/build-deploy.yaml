@@ -23,7 +23,7 @@ jobs:
         run: |
           export GIT_COMMIT_DATE=$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M')
           mvn versions:set -DnewVersion=${GITHUB_SHA::8}_${GIT_COMMIT_DATE} --batch-mode
-          mvn deploy --batch-mode -DdeployAtEnd=true -Dmaven.wagon.http.pool=false source:jar-no-fork --settings .github/maven-settings.xml
+          mvn deploy -X --batch-mode -DdeployAtEnd=true -Dmaven.wagon.http.pool=false source:jar-no-fork --settings .github/maven-settings.xml
         env:
           GITHUB_USERNAME: x-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
