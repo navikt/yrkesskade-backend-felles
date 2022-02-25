@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>skademelding</module>
+        <module>unleash</module>
     </modules>
 
     <properties>
