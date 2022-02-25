@@ -7,6 +7,10 @@ class MinimumAntallAnsatteStrategy(private val context: UnleashContext) : Strate
     override fun getName(): String = "byMinimumAntall"
 
     override fun isEnabled(parameters: MutableMap<String, String>): Boolean {
+        return isEnabled(parameters, context)
+    }
+
+    override fun isEnabled(parameters: MutableMap<String, String>, unleashContext: UnleashContext): Boolean {
         val paramMinAntall = parameters.get("minimumAntallAnsatte")?.toIntOrNull()
         if (paramMinAntall == null || paramMinAntall <= 0) {
             return true;

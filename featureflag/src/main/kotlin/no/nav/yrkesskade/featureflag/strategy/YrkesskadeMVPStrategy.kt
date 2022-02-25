@@ -15,6 +15,10 @@ class YrkesskadeMVPStrategy(private val context: UnleashContext, private val str
     override fun getName() = "yrkesskadeMVP"
 
     override fun isEnabled(parameters: MutableMap<String, String>): Boolean {
+        return isEnabled(parameters, context)
+    }
+
+    override fun isEnabled(parameters: MutableMap<String, String>, context: UnleashContext): Boolean {
         for (strategy in strategies) if (!strategy.isEnabled(parameters, context)) return false
         return true
     }

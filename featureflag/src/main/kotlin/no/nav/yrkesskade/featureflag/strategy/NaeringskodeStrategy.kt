@@ -7,6 +7,10 @@ class NaeringskodeStrategy(private val context : UnleashContext) : Strategy {
     override fun getName(): String = "byNaeringskoder"
 
     override fun isEnabled(parameters: MutableMap<String, String>): Boolean {
+        return isEnabled(parameters, context)
+    }
+
+    override fun isEnabled(parameters: MutableMap<String, String>, context: UnleashContext): Boolean {
         val toggledNaeringskoder = parameters.get("naeringskoder")
         if (toggledNaeringskoder == null) {
             return true
