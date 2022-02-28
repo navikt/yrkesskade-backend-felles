@@ -56,8 +56,7 @@ components:
         - innmelderrolle
       properties:
         norskIdentitetsnummer:
-          type: integer
-          format: int64
+          type: string
           example: 12345699999
 #       fornavn:
 #         type: string
@@ -458,7 +457,7 @@ components:
         - På veg mellom arbeidssteder
         - Offentlig sted
         - Avtalt hjemmekontor
-      example: Vanlig arbeidsplass
+      example: På arbeidsstedet inne
     Tidstype:
       type: string
       enum:
