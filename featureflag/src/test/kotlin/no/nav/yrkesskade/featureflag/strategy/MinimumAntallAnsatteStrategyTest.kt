@@ -24,8 +24,7 @@ class MinimumAntallAnsatteStrategyTest {
     fun `is enabled - parameter and property set and equal`() {
         val context: UnleashContext = UnleashContext
             .builder()
-            .addProperty(
-                "antallAnsatte", "5")
+            .addProperty("antallAnsatte", "5")
             .build()
 
         val minimumAntallAnsatteStrategy = MinimumAntallAnsatteStrategy(context)
@@ -38,8 +37,7 @@ class MinimumAntallAnsatteStrategyTest {
     fun `is disabled - parameter and property set and lower`() {
         val context: UnleashContext = UnleashContext
             .builder()
-            .addProperty(
-                "antallAnsatte", "5")
+            .addProperty("antallAnsatte", "5")
             .build()
 
         val minimumAntallAnsatteStrategy = MinimumAntallAnsatteStrategy(context)

@@ -14,7 +14,7 @@ class IsNotProdStrategyTest {
             .build()
 
         val isNotProdStrategy = IsNotProdStrategy(context)
-       assertThat(isNotProdStrategy.isEnabled(HashMap(), context)).isTrue()
+        assertThat(isNotProdStrategy.isEnabled(HashMap(), context)).isTrue()
     }
 
     @Test
