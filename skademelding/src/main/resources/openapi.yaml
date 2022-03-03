@@ -258,6 +258,7 @@ components:
       type: string
       enum:
         - Støt/treff av gjenstand # Dekker i tabell E  - Truffet av en gjenstand i bevegelse, kollisjon med
+        - Trafikkulykke
         - Sammenstøt, bitt, spark, osv. (dyr eller menneske) # Hentet fra Tabell E
         - Sammenstøt med gjenstand eller påkjørsel # Dekker i Tabell E - Horisontal eller vertikal kontakt med en stasjonær gjenstand (den skadde er i bevegelse)
         - Velt
