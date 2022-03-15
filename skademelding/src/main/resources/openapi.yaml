@@ -191,7 +191,7 @@ components:
           example:
         land:
           type: string
-          example: DENMARK
+          example: DK
       nullable: true
     Dekningsforhold:
       type: object
@@ -428,6 +428,7 @@ components:
     NaarSkjeddeUlykken: # avstemme navngiving med gui
       type: string
       enum: # oppdatere kodelister
+        - I avtalt arbeidstid
  #      - Under pålagt tjeneste (for militære)
  #      - Under manøver ja/nei tidsrom
  #      - Under overtidsarbeid
@@ -441,7 +442,6 @@ components:
         - Hvilende vakt
         - Under frivillig arbeid
         - Under redningsarbeid, vakthold eller redningsøvelse
-        - I avtalt arbeidstid
         - Alternativene passer ikke # Verdi Annet er blitt omformulert 100222
       example: I avtalt arbeidstid
     HvorSkjeddeUlykken: # Dette skal generere valt i Gui felt "Hvor inntraff ulykken" 140222
