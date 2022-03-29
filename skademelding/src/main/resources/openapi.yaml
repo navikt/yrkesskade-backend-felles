@@ -6,7 +6,7 @@ info:
     email: yrkesskade@nav.no
   version: 0.0.2
 servers:
-  - url: 'https://yrkesskade-melding-api.dev.intern.nav.no/api'
+  - url: 'https://yrkesskade-melding-api.dev.intern.nav.no'
 paths:
   /v1/skademeldinger: #endret til generell stinavngivning 150222
     post:
