@@ -391,6 +391,7 @@ components:
       type: string
       enum:
         - Arbeidstaker
+        - Lærling
   #     - Militær
   #     - Elev
   #     - Fiske
