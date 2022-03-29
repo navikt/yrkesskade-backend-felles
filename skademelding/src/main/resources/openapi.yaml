@@ -201,7 +201,7 @@ components:
 #       - navnPaaVirksomheten #endret på begrepet 100222
         - stillingstittelTilDenSkadelidte #endre på begrepet 100222
         # - yrke tatt ut når vi innførte Stillingskodetabell
-        - rolletype # i MVP er det predefinert at den skadelidte er arbeidstaker, så inputfeltet i dialogen er inaktiv
+        - rolletype
       properties:
         organisasjonsnummer:
           type: string
@@ -391,6 +391,7 @@ components:
       type: string
       enum:
         - Arbeidstaker
+        - Lærling
   #     - Militær
   #     - Elev
   #     - Fiske
