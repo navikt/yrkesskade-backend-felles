@@ -11,6 +11,7 @@
     <modules>
         <module>skademelding</module>
         <module>featureflag</module>
+        <module>kodeverk</module>
     </modules>
 
     <properties>
