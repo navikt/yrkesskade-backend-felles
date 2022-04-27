@@ -12,6 +12,7 @@
         <module>skademelding</module>
         <module>featureflag</module>
         <module>kodeverk</module>
+        <module>storage</module>
     </modules>
 
     <properties>
@@ -112,6 +113,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.7</version>
                 <configuration>
                     <flattenMode>bom</flattenMode>
                     <flattenedPomFilename>.flattened</flattenedPomFilename>
