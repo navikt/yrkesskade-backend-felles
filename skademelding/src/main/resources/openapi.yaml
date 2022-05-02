@@ -4,9 +4,9 @@ info:
   description: Skademeldingsdefinisjon
   contact:
     email: yrkesskade@nav.no
-  version: 0.0.2
+  version: 0.0.3
 servers:
-  - url: 'https://yrkesskade-melding-api.dev.intern.nav.no'
+  - url: 'https://yrkesskade-melding-api.intern.nav.no/api'
 paths:
   /v1/skademeldinger: #endret til generell stinavngivning 150222
     post:
@@ -28,7 +28,6 @@ components:
   schemas:
 
     ################################################### MODELS ###################################################
-    # metadata : kilde
     Skademelding:
       type: object
       required:
@@ -103,13 +102,15 @@ components:
         - antattSykefravaerTabellH
       properties:
         alvorlighetsgrad:
-          $ref: '#/components/schemas/Alvorlighetsgrad'
+          type: string
+          example: antattIkkeOppsoektLege
 #       oppsoektHelsehjelp: # tatt ut etter vurdert personvern knyttet til at arbeidsgiver skal spørre ansatt om dette, som ikke er ok 170222
 #         $ref: '#/components/schemas/OppsoektHelsehjelp'
         skadedeDeler: # ssb prioritere bare den viktigste skaden?
           $ref: '#/components/schemas/SkadedeDeler'
         antattSykefravaerTabellH:
-          $ref: '#/components/schemas/AntattSykefravaerTabellH'
+          type: string
+          example: fravaersdagerUkjent
       nullable: false
     SkadedeDeler:
       type: array
@@ -124,9 +125,9 @@ components:
         - kroppsdelTabellD
       properties:
         skadeartTabellC:
-          $ref: '#/components/schemas/SkadeartTabellC'
+          type: string
         kroppsdelTabellD:
-          $ref: '#/components/schemas/KroppsdelTabellD'
+          type: string
       nullable: false
     Hendelsesfakta:
       type: object
@@ -146,32 +147,35 @@ components:
         tid:
           $ref: '#/components/schemas/Tid'
         naarSkjeddeUlykken:
-          $ref: '#/components/schemas/NaarSkjeddeUlykken'
- #       naarSkjeddeUlykkenFritekst: # Utgår og behovet erstattes at Kun stort fritekstelement benyttes 100222
- #         type: string
- #         example: Noe annet
+          type: string
+          example: iAvtaltArbeidstid
         hvorSkjeddeUlykken:
-          $ref: '#/components/schemas/HvorSkjeddeUlykken'
+          type: string
+          example: arbeidsstedUte
         ulykkessted:
+          type: string
+          example:
           $ref: '#/components/schemas/Ulykkessted'
         aarsakUlykkeTabellAogE:
           type: array
           items:
-            $ref: '#/components/schemas/UlykkesAarsakTabellAogE'
+            type: string
           nullable: false
+          example: [ "stukketEllerKuttet" ]
         bakgrunnsaarsakTabellBogG:
           type: array
           items:
-            $ref: '#/components/schemas/BakgrunnsaarsakTabellBogG'
+            type: string
           nullable: false
-          example: [ "Utilstrekkelig sikring", "Verneutstyr fjernet" ]
+          example: [ "manglendeMerkingEllerVarsling", "verneutstyrUtAvFunksjon" ]
         utfyllendeBeskrivelse:
           type: string
           example: Fabrikklokalet var mørkt og rotete. 1000 tegn
 #        utloesendeFaktorTabellE:
 #          $ref: '#/components/schemas/UtloesendeFaktorTabellE'
         stedsbeskrivelseTabellF:
-          $ref: '#/components/schemas/StedsbeskrivelseTabellF'
+          type: string
+          example: industriellVirksomhet
 #        arbeidsforholdsavvikTabellG:
 #         $ref: '#/components/schemas/ArbeidsforholdsavvikTabellG'
       nullable: false
@@ -201,7 +205,7 @@ components:
 #       - navnPaaVirksomheten #endret på begrepet 100222
         - stillingstittelTilDenSkadelidte #endre på begrepet 100222
         # - yrke tatt ut når vi innførte Stillingskodetabell
-        - rolletype
+        - rolletype # i MVP er det predefinert at den skadelidte er arbeidstaker, så inputfeltet i dialogen er inaktiv
       properties:
         organisasjonsnummer:
           type: string
@@ -213,12 +217,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Stillingstittel'
-          nullable: false
+          nullable: true
 #        yrke:
 #          type: string
 #          example: Fruktmedarbeider
         rolletype:
-          $ref: '#/components/schemas/Rolletype'
+          type: string
+          example: arbeidstaker
       nullable: false
     Tid:
       type: object
@@ -253,170 +258,6 @@ components:
         adresse:
           $ref: '#/components/schemas/Adresse'
 
-    ################################################### ENUMS ###################################################
-    UlykkesAarsakTabellAogE: #endret begrepet 100222, lista  er utvidet og slått sammen med Tabell E, men dette må redesignes i GUI og i kontrakten til å støtte flervalg samtidig som minimum ett valg er obligatorisk 
-      type: string
-      enum:
-        - Støt/treff av gjenstand # Dekker i tabell E  - Truffet av en gjenstand i bevegelse, kollisjon med
-        - Trafikkulykke
-        - Sammenstøt, bitt, spark, osv. (dyr eller menneske) # Hentet fra Tabell E
-        - Sammenstøt med gjenstand eller påkjørsel # Dekker i Tabell E - Horisontal eller vertikal kontakt med en stasjonær gjenstand (den skadde er i bevegelse)
-        - Velt
-        - Klemt/fanget # Dekker i Tabell E - Fanget, klemt, osv.
-        - Fall av person # tilpasset begrepet for å tydeliggjøre at det gjelder personen
-        - Stukket/kuttet av skarp/spiss gjenstand # Dekker i tabell E - Kontakt med hvass, spiss, ujevn, grov ytre faktor
-        - Kontakt med elektrisk spenning, farlige stoffer # overlapp med E tabell
-        - Høy temperatur
-        - Lav temperatur
-        - Kjemikalier
-        - Eksplosjon, sprenging, brann
-        - Trusler om vold
-        - Påført voldsskade
-        - Druknet, begravd, omsvøpt # hentet fra tabell E 100222
-        - Fysisk eller psykisk belastning # Hentet fra Tabell E
-        - Alternativene passer ikke # vi endret formuleringen som tidligere var "Annet" 100222
-      example: Fall av person
-      
-      # legge inn i kontrakten ArbeidsplasstypeTabellF  - Mirna
-      # Vi trenger å støtte valg av flere årsaker til på Bakgrunnsårsak både i GUI og i kontrakten. Minimum ett må være valgt
-    BakgrunnsaarsakTabellBogG:
-      type: string
-      enum:
-        - Manglende merking, varsling, skilting
-        - Mangelfulle sikkerhetsrutiner
-        - Utilstrekkelig sikring
-        - Vernetiltak ikke/delvis gjennomført
-        - Verneutstyr satt ut av funksjon
-        - Verneutstyr fjernet
-        - Uautorisert bruk av utstyr
-        - Defekt utstyr
-        - Feil bruk eller tap av kontroll (helt eller delvis) over maskin, transportmiddel, utstyr for å forflytte materiale, håndholdt verktøy, gjenstand, dyr # Slått sammen et felt fra B og ett fra G
-        - Feil pålasting
-        - Feil plassering
-        - Feil løfting
-        - Feil utførelse av oppgaven
-        - Mangelfull opplæring
-        - Angrepet/truet av en annen person
-        - Uforsvarlig «lek», spøk eller veddemål # Prøve å ha lengre ned i lista
-        - Påvirkning av alkohol/andre rusmidler # Prøve å ha lengre ned i lista
-        - Bedriftsidrett eller lignende
-        - Avvik som følge av elektriske problemer, eksplosjon, brann # lagt til fra Tabell G 100222
-        - Avvik som følge av overstrømning, velt, lekkasje, utstrømning, avdamping, utstråling # lagt til fra Tabell G 100222
-        - Bristing, sprengning, oppsplitting, glidning, fall, ytre faktor kollapser # lagt til fra Tabell G 100222
-        - Glidning, snubling # Endret litt på et valg fra Tabell G og tilpasset enda en verdi i tabell A 100222
-        - Kroppsbevegelse uten fysisk belastning (som vanligvis fører til en ytre skade) # Hentet fra TabellG
-        - Kroppsbevegelse under eller med fysisk belastning (som vanligvis fører til en indre skade) # Hentet fra TabellG
-        - Tistedeværelse ved vold, aggresjon, trussel # Endret formuleringen til et element fra Tabell G 100222
-        - Alternativene passer ikke # vi endret formuleringen som tidligere var "Annet" 100222
-      example: Utilstrekkelig sikring
-    SkadeartTabellC:
-      type: string
-      enum:
-        - Bløtdelsskade uten sår (klemskade)
-        - Sårskade
-        - Tap av legemsdel
-        - Forstuing, forvridning
-        - Knokkelbrudd
-        - Varmeskade
-        - Kuldeskade
-        - Etsing
-        - Akutt forgiftning
-        - Psykiske ettervirkninger
-        - Annet
-      example: Varmeskade
-    KroppsdelTabellD:
-      type: string
-      enum:
-        - Hode
-        - Ansikt
-        - Øye, venstre
-        - Øye, høyre
-        - Øre, venstre
-        - Øre, høyre
-        - Tenner
-        - Hals/nakke
-        - Rygg
-        - Ribben/skulderblad
-        - Brystkasse/lunger/hjerte/spiserør
-        - Mave/bekken/fordøyelsesorganer/nyre/urinveier
-        - Skulder, venstre
-        - Skulder, høyre
-        - Arm/albue, venstre
-        - Arm/albue, høyre
-        - Håndledd, venstre
-        - Håndledd, høyre
-        - Hånd, venstre
-        - Hånd, høyre
-        - Fingre, venstre
-        - Fingre, høyre
-        - Hofte, venstre
-        - Hofte høyre
-        - Ben m/kne, venstre
-        - Ben m/kne, høyre
-        - Ankel, venstre
-        - Ankel, høyre
-        - Fot, venstre
-        - Fot, høyre
-        - Tær, venstre
-        - Tær, høyre
-        - Hele kroppen (allmenn forgiftning, allmenn nedkjøling, e.l.)
-      example: Tenner
-    StedsbeskrivelseTabellF:
-      type: string
-      enum:
-        - Plass for industriell virksomhet
-        - Anleggsområde, byggeplass, dagbruddssteinbrudd, dagbruddsgruve
-        - Plass for jordbruk, avl av dyr, fiskeoppdrett, skogbruk
-        - Plass for servicevirksomhet, kontor, fornøyelser, diverse
-        - Helseinstitusjoner
-        - Offentlig sted
-        - Hjemme # Menes det i eget hjem eller kan de dekke en annens hjem eller annen type bopel?
-        - Idrettsområde
-        - I luften, over bakkenivå, ekskl. anleggsområder
-        - Under jordoverflaten, ekskl. anleggsområder
-        - På/over vann, ekskl. anleggsområder
-        - I høytrykksomgivelser, ekskl. anleggsområder
-        - Alternativene passer ikke
-      example: Plass for industriell virksomhet
-    AntattSykefravaerTabellH: # Vi har endret modellen slik at dødsfall dekkes i alvorlighetsgraden, mens fravær dekkes i dette elementet
-      type: string
-      enum:
-        - Fraværsdager ukjent
-        - Kjent fravær mindre enn 3 dager
-        - Kjent fravær mer enn 3 dager
-        - Alternativene passer ikke # lagt til for å kunne velges ved tilfelle dødsfall 140222
-#        - Dødsulykke
-      example: Kjent fravær mindre enn 3 dager
-    Rolletype: # representerer Persongrupper etter regelverket
-      type: string
-      enum:
-        - Arbeidstaker
-        - Lærling
-  #     - Militær
-  #     - Elev
-  #     - Fiske
-  #     - Petroleum
-  #     - Institusjons beboer # utvider rolletyper til å passe inni framtiden med dekningsforhold
-      example: Arbeidstaker
-#   OppsoektHelsehjelp:
-#     type: string
-#     enum:
-#       - Lege oppsøkt
-#       - Annen helsepersonell oppsøkt
-#       - Vet ikke
-#    example: Ja
-    Alvorlighetsgrad:
-      type: string
-      enum: # Nye verdier valgt og lagt inn 170222 for å dekke behov å vite om lege oppsøkt
-        - Det antas at helsehjelp ikke er oppsøkt
-        - Det antas at helsehjelp er oppsøkt
-        - Alvorlig kreftsykdom
-        - Andre livstruende sykdom/skade
-        - Dødsfall
-#       - Alternativene passer ikke
-#       - Ukjent
-      example: Alvorlig kreftsykdom
-      # Mirna må oppdatere med Fraværsspørsmål og mulige verdier når Mona har tenkt ut ny design
     Innmelderrolle:
       type: string
       enum: # OK verifisert for MVP 100222, men lista skal etterhvert utvides, Forsvaret
@@ -426,40 +267,6 @@ components:
  #      - Pårørende
  #      - Helsevesen
       example: Virksomhetsrepresentant
-    NaarSkjeddeUlykken: # avstemme navngiving med gui
-      type: string
-      enum: # oppdatere kodelister
-        - I avtalt arbeidstid
- #      - Under pålagt tjeneste (for militære)
- #      - Under manøver ja/nei tidsrom
- #      - Under overtidsarbeid
-        - Utenfor arbeidstid
- #      - I undervisningstiden
- #      - På SFO
- #      - Under utøvelse av næring
-        - Under permisjon
-        - Under full sykemelding
-        - Fritid/ privat aktivitet
-        - Hvilende vakt
-        - Under frivillig arbeid
-        - Under redningsarbeid, vakthold eller redningsøvelse
-        - Alternativene passer ikke # Verdi Annet er blitt omformulert 100222
-      example: I avtalt arbeidstid
-    HvorSkjeddeUlykken: # Dette skal generere valt i Gui felt "Hvor inntraff ulykken" 140222
-      type: string
-      enum: # Listen oppdatert 100222 fra confluence siden Hvor inntraff ulykken, henter kun MVP relevante verdier, de er grønn markert
-#        - Vanlig arbeidsplass
-#        - På vei til/fra arbeid
-#        - Mellom arbeidssteder
-        - På arbeidsstedet inne
-        - På arbeidsstedet ute
-        - På arbeidsstedet lukket området
-        - På veg til/fra arbeidsstedet
-        - Kommet frem til/på midlertidig arbeidssted
-        - På veg mellom arbeidssteder
-        - Offentlig sted
-        - Avtalt hjemmekontor
-      example: På arbeidsstedet inne
     Tidstype:
       type: string
       enum:
