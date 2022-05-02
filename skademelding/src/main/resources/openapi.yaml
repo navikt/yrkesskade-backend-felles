@@ -70,7 +70,9 @@ components:
           type: string
           example: 123456789
         innmelderrolle:
-          $ref: '#/components/schemas/Innmelderrolle'
+          type: string
+          example: virksomhetsrepresentant
+          nullable: false
         altinnrolleIDer: # kan ha flere roller. skal vi velge en eller lagre flere?
           type: array
           items:
@@ -216,11 +218,8 @@ components:
         stillingstittelTilDenSkadelidte:
           type: array
           items:
-            $ref: '#/components/schemas/Stillingstittel'
+            type: string
           nullable: true
-#        yrke:
-#          type: string
-#          example: Fruktmedarbeider
         rolletype:
           type: string
           example: arbeidstaker
@@ -257,16 +256,6 @@ components:
           example: false
         adresse:
           $ref: '#/components/schemas/Adresse'
-
-    Innmelderrolle:
-      type: string
-      enum: # OK verifisert for MVP 100222, men lista skal etterhvert utvides, Forsvaret
-        - Virksomhetsrepresentant # den eneste som vil faktisk brukes som gyldig verdi til lansering av MVP; skal denne inkludere også studiestedrepresentant, og institusjonsrepresentant: kanskje døpe om til Virksomhestrepresentant 140222
- #      - Verge
- #      - Skadelidt
- #      - Pårørende
- #      - Helsevesen
-      example: Virksomhetsrepresentant
     Tidstype:
       type: string
       enum:
