@@ -129,7 +129,6 @@ components:
         - ulykkessted
         - aarsakUlykkeTabellAogE
         - bakgrunnsaarsakTabellBogG
-        - stedsbeskrivelseTabellF
       properties:
         tid:
           $ref: '#/components/schemas/Tid'
