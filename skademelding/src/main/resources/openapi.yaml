@@ -199,6 +199,8 @@ components:
         navnPaaVirksomheten: # Hva med adressen til bedriften? Vises i skjermbildet.
           type: string
           example: Forretningsfabrikken AS
+        virksomhetensAdresse:
+          $ref: '#/components/schemas/Adresse'
         stillingstittelTilDenSkadelidte:
           type: array
           description: Gyldige verdier hentes fra kodeverklisten - 'stillingstittel'
