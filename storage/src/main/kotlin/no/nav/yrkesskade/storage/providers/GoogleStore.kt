@@ -25,7 +25,7 @@ object GoogleStore : Store {
     fun getInstance() = this
 
     override fun putBlob(blob: Blob): String {
-        val blobId = BlobId.of(bucketName, blob.id)
+        val blobId = BlobId.of(bucketName, getName(blob))
         val blobInfo =
             BlobInfo.newBuilder(blobId).setMetadata(mapOf("eier" to blob.bruker, "filnavn" to blob.navn)).build()
         val gcpBlob = storage.create(blobInfo, blob.bytes)
@@ -34,7 +34,7 @@ object GoogleStore : Store {
     }
 
     override fun getBlob(blob: Blob): Blob? {
-        val gcpBlob: com.google.cloud.storage.Blob = storage[BlobId.of(bucketName, blob.id)]
+        val gcpBlob: com.google.cloud.storage.Blob = storage[BlobId.of(bucketName, getName(blob))]
 
         if (gcpBlob.metadata.get("eier") != blob.bruker) {
             // ikke samme person - returner null
@@ -45,7 +45,7 @@ object GoogleStore : Store {
     }
 
     override fun deleteBlob(blob: Blob): Boolean {
-        val gcpBlob: com.google.cloud.storage.Blob = storage[BlobId.of(bucketName, blob.id)]
+        val gcpBlob: com.google.cloud.storage.Blob = storage[BlobId.of(bucketName, getName(blob))]
 
         if (gcpBlob.metadata.get("eier") != blob.bruker) {
             // ikke samme person
@@ -55,4 +55,6 @@ object GoogleStore : Store {
         return gcpBlob.delete()
 
     }
+
+    private fun getName(blob: Blob): String = "${blob.bruker}/${blob.id}"
 }
