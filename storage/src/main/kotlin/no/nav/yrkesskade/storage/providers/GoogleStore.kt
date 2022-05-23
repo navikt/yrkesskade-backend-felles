@@ -16,7 +16,7 @@ object GoogleStore : Store {
     init {
         storage = StorageOptions.getDefaultInstance().getService();
         projectId = System.getenv("GCP_TEAM_PROJECT_ID") // kommer fra NAIS, må settes manuelt lokalt
-        bucketName = getBucketName(System.getProperty("spring.profiles.active"))
+        bucketName = System.getenv("VEDLEGG_BUCKET_NAME")
 
         if (projectId == null) {
             throw InstantiationError("GCP_PROJECT_ID environment variable not set")
@@ -55,13 +55,6 @@ object GoogleStore : Store {
 
         return gcpBlob.delete()
 
-    }
-
-    private fun getBucketName(env: String): String {
-        if (env == "prod") {
-            return "yrkesskade-skadeforklaring-vedlegg-prod"
-        }
-        return "yrkesskade-skadeforklaring-vedlegg-dev"
     }
 
     private fun getName(blob: Blob): String = "${blob.bruker}/${blob.id}"
