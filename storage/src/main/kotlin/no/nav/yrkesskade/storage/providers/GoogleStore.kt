@@ -10,12 +10,13 @@ import no.nav.yrkesskade.storage.Store
 object GoogleStore : Store {
 
     private val storage: Storage
-    private val bucketName = "yrkesskade-skadeforklaring-vedlegg" // definert i nais.yaml
+    private val bucketName: String // definert i nais.yaml
     private val projectId: String
 
     init {
         storage = StorageOptions.getDefaultInstance().getService();
         projectId = System.getenv("GCP_TEAM_PROJECT_ID") // kommer fra NAIS, må settes manuelt lokalt
+        bucketName = getBucketName(System.getenv("spring.profiles.active"))
 
         if (projectId == null) {
             throw InstantiationError("GCP_PROJECT_ID environment variable not set")
@@ -54,6 +55,13 @@ object GoogleStore : Store {
 
         return gcpBlob.delete()
 
+    }
+
+    private fun getBucketName(env: String): String {
+        if (env == "prod") {
+            return "yrkesskade-skadeforklaring-vedlegg-prod"
+        }
+        return "yrkesskade-skadeforklaring-vedlegg-dev"
     }
 
     private fun getName(blob: Blob): String = "${blob.bruker}/${blob.id}"
