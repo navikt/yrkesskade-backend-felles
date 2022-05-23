@@ -16,7 +16,7 @@ object GoogleStore : Store {
     init {
         storage = StorageOptions.getDefaultInstance().getService();
         projectId = System.getenv("GCP_TEAM_PROJECT_ID") // kommer fra NAIS, må settes manuelt lokalt
-        bucketName = getBucketName(System.getenv("spring.profiles.active"))
+        bucketName = getBucketName(System.getProperty("spring.profiles.active"))
 
         if (projectId == null) {
             throw InstantiationError("GCP_PROJECT_ID environment variable not set")
