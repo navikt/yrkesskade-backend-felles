@@ -35,9 +35,14 @@ object GoogleStore : Store {
     }
 
     override fun getBlob(blob: Blob): Blob? {
-        val gcpBlob: com.google.cloud.storage.Blob = storage[BlobId.of(bucketName, getName(blob))]
+        val gcpBlob: com.google.cloud.storage.Blob
+        try {
+            gcpBlob = storage[BlobId.of(bucketName, getName(blob))]
+        } catch (npe: NullPointerException) {
+            return null
+        }
 
-        if (gcpBlob.metadata.get("eier") != blob.bruker) {
+        if (gcpBlob.metadata["eier"] != blob.bruker) {
             // ikke samme person - returner null
             return null;
         }

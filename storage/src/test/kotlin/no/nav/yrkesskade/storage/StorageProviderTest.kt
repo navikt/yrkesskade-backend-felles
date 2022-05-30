@@ -30,4 +30,13 @@ class StorageProviderTest {
             assertThat(store.getBlob(blob)).isNull()
         }
     }
+
+    @Test
+    fun `skal returnere null dersom blob ikke finnes`() {
+        val store = StorageProvider.getStorage(StorageType.MEMORY)
+        val manglendeBlob = Blob("9999999", "ukjent", null, null, null)
+
+        val resultat = store.getBlob(manglendeBlob)
+        assertThat(resultat).isNull()
+    }
 }
