@@ -236,8 +236,8 @@ components:
             til:
               type: string
               format: date
-            sykdomPaavistTidspunkt:
-              description: Dersom periode er valgt, må det også gis et tidspunkt for når sykdom ble påvist
+            sykdomPaavist:
+              description: Dersom periode er valgt, må det også gis en dato for når sykdom ble påvist
               type: string
               format: date
         ukjent:
