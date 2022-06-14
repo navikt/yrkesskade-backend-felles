@@ -98,6 +98,10 @@ components:
           type: string
           example: fravaersdagerUkjent
           description: Gyldige verdier hentes fra kodeliste - 'harSkadelidtHattFravaer'
+        sykdomstype:
+          type: string
+          example: sykdomIHjernenEllerNervesystemet
+          description: Gyldige verdier hentes fra kodeliste - 'sykdomstype'
       nullable: false
     SkadedeDeler:
       type: array
@@ -166,6 +170,10 @@ components:
           type: string
           example: industriellVirksomhet
           description: Gyldige verdier hentes fra kodeverklisten - 'typeArbeidsplass'
+        paavirkningsform:
+          type: string
+          example: kjemikalierEllerLoesemidler
+          description: Gyldige verdier hentes fra kodeverkliste -
       nullable: false
     Adresse:
       type: object
@@ -226,6 +234,10 @@ components:
               type: string
               format: date
             til:
+              type: string
+              format: date
+            sykdomPaavist:
+              description: Dersom periode er valgt, må det også gis en dato for når sykdom ble påvist
               type: string
               format: date
         ukjent:
