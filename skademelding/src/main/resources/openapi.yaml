@@ -171,9 +171,11 @@ components:
           example: industriellVirksomhet
           description: Gyldige verdier hentes fra kodeverklisten - 'typeArbeidsplass'
         paavirkningsform:
-          type: string
-          example: kjemikalierEllerLoesemidler
-          description: Gyldige verdier hentes fra kodeverkliste -
+          type: array
+          items:
+              type: string
+          example: [ "kjemikalierEllerLoesemidler" ]
+          description: Gyldige verdier hentes fra kodeverkliste - 'paavirkningsform'
       nullable: false
     Adresse:
       type: object
