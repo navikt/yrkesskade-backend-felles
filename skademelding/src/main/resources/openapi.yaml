@@ -94,14 +94,10 @@ components:
           description: Gyldige verdier hentes fra kodeliste - 'alvorlighetsgrad'
         skadedeDeler: # ssb prioritere bare den viktigste skaden?
           $ref: '#/components/schemas/SkadedeDeler'
-        antattSykefravaerTabellH:
+        antattSykefravaer:
           type: string
           example: fravaersdagerUkjent
           description: Gyldige verdier hentes fra kodeliste - 'harSkadelidtHattFravaer'
-        sykdomstype:
-          type: string
-          example: sykdomIHjernenEllerNervesystemet
-          description: Gyldige verdier hentes fra kodeliste - 'sykdomstype'
       nullable: false
     SkadedeDeler:
       type: array
@@ -112,14 +108,16 @@ components:
       title: SkadetDel
       type: object
       required:
-        - skadeartTabellC
-        - kroppsdelTabellD
+        - skadeart
+        - kroppsdel
       properties:
-        skadeartTabellC:
+        skadeart:
           type: string
           example: bruddskade
-          description: Gyldige verdier hentes fra kodeliste - 'skadetype'
-        kroppsdelTabellD:
+          description: | 
+            Gyldige verdier hentes fra kodeliste - 'skadetype' eller 'sykdomstype'. 
+            En skadeart kan enten være en skadetype eller en sykdomstype med en tilhørende kroppsdel. Dersom en sykdomstype ikke har passende kroppsdel, kan det velges kroppsdel heleKroppen velges
+        kroppsdel:
           type: string
           example: hode
           description: Gyldige verdier hentes fra kodeliste - 'skadetKroppsdel'
@@ -131,8 +129,8 @@ components:
         - naarSkjeddeUlykken
         - hvorSkjeddeUlykken
         - ulykkessted
-        - aarsakUlykkeTabellAogE
-        - bakgrunnsaarsakTabellBogG
+        - aarsakUlykke
+        - bakgrunnsaarsak
       properties:
         tid:
           $ref: '#/components/schemas/Tid'
@@ -148,14 +146,14 @@ components:
           type: string
           example:
           $ref: '#/components/schemas/Ulykkessted'
-        aarsakUlykkeTabellAogE:
+        aarsakUlykke:
           type: array
           items:
             type: string
           nullable: false
           example: [ "stukketEllerKuttet" ]
           description: Gyldige verdier hentes fra kodeverklisten - 'aarsakOgBakgrunn'
-        bakgrunnsaarsakTabellBogG:
+        bakgrunnsaarsak:
           type: array
           items:
             type: string
@@ -166,7 +164,7 @@ components:
           type: string
           example: Fabrikklokalet var mørkt og rotete.
           description: En utfyllende beskrivelse av ulykken som ikke allerede er fanget opp av andre felter. Maks 2000 tegn
-        stedsbeskrivelseTabellF:
+        stedsbeskrivelse:
           type: string
           example: industriellVirksomhet
           description: Gyldige verdier hentes fra kodeverklisten - 'typeArbeidsplass'
@@ -229,19 +227,10 @@ components:
         tidspunkt:
           type: string
           format: date-time
-        periode:
-          type: object
-          properties:
-            fra:
-              type: string
-              format: date
-            til:
-              type: string
-              format: date
-            sykdomPaavist:
-              description: Dersom periode er valgt, må det også gis en dato for når sykdom ble påvist
-              type: string
-              format: date
+        perioder:
+          type: array
+          items:
+            $ref: '#/components/schemas/Periode'
         ukjent:
           type: boolean
           example: false
@@ -265,6 +254,20 @@ components:
         - Periode
         - Ukjent
       example: Tidspunkt
+    Periode:
+      title: Periode
+      type: object
+      properties:
+        fra:
+          type: string
+          format: date
+        til:
+          type: string
+          format: date
+        sykdomPaavist:
+          description: Dersom periode er valgt, må det også gis en dato for når sykdom ble påvist
+          type: string
+          format: date
     ################################################# RESPONSE TYPES #################################################
     ApiResponse:
       type: object
