@@ -265,7 +265,7 @@ components:
           type: string
           format: date
         sykdomPaavist:
-          description: Dersom periode er valgt, må det også gis en dato for når sykdom ble påvist
+          description: Dersom yrkessykdom, bør det også gis en dato for når sykdommen ble påvist
           type: string
           format: date
     ################################################# RESPONSE TYPES #################################################
