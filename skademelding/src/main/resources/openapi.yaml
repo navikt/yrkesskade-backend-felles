@@ -129,7 +129,6 @@ components:
         - naarSkjeddeUlykken
         - hvorSkjeddeUlykken
         - ulykkessted
-        - aarsakUlykke
       properties:
         tid:
           $ref: '#/components/schemas/Tid'
@@ -151,14 +150,14 @@ components:
             type: string
           nullable: false
           example: [ "stukketEllerKuttet" ]
-          description: Gyldige verdier hentes fra kodeverklisten - 'aarsakOgBakgrunn'
+          description: Gyldige verdier hentes fra kodeverklisten - 'aarsakOgBakgrunn', Dette feltet er påkrevd dersom det meldes om en yrkesskade.
         bakgrunnsaarsak:
           type: array
           items:
             type: string
           nullable: false
           example: [ "manglendeMerkingEllerVarsling", "verneutstyrUtAvFunksjon" ]
-          description: Gyldige verdier hentes fra kodeverklisten - 'bakgrunnForHendelsen'
+          description: Gyldige verdier hentes fra kodeverklisten - 'bakgrunnForHendelsen'. Dette feltet er påkrevd dersom det meldes om en yrkesskade.
         utfyllendeBeskrivelse:
           type: string
           example: Fabrikklokalet var mørkt og rotete.
