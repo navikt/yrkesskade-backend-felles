@@ -13,6 +13,7 @@
         <module>featureflag</module>
         <module>kodeverk</module>
         <module>storage</module>
+        <module>saksbehandling</module>
     </modules>
 
     <properties>
