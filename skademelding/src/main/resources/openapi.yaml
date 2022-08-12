@@ -127,7 +127,6 @@ components:
       required:
         - tid
         - naarSkjeddeUlykken
-        - hvorSkjeddeUlykken
         - ulykkessted
       properties:
         tid:
