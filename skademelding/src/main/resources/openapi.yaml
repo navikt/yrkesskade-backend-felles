@@ -127,7 +127,6 @@ components:
       required:
         - tid
         - naarSkjeddeUlykken
-        - ulykkessted
       properties:
         tid:
           $ref: '#/components/schemas/Tid'
