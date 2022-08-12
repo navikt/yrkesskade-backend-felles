@@ -216,6 +216,9 @@ components:
         rolletype:
           type: string
           example: arbeidstaker
+        tjenesteperiode:
+          $ref: '#/components/schemas/Periode'
+          description: Feltet for tjenesteperiode benyttes i forbindelse med militærtjeneste
       nullable: false
     Tid:
       type: object
