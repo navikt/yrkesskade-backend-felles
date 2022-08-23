@@ -171,10 +171,14 @@ components:
           example: [ "kjemikalierEllerLoesemidler" ]
           description: Gyldige verdier hentes fra kodeverkliste - 'paavirkningsform'
       nullable: false
+    Ulykkesadresse:
+      allOf: # Combines the BasicErrorModel and the inline model
+        - $ref: '#/components/schemas/Adresse'
+        - type: object
+          required:
+            - adresselinje1
     Adresse:
       type: object
-      required:
-        - adresselinje1
       properties:
         adresselinje1:
           type: string
@@ -253,7 +257,7 @@ components:
           type: boolean
           example: false
         adresse:
-          $ref: '#/components/schemas/Adresse'
+          $ref: '#/components/schemas/Ulykkesadresse'
     Tidstype:
       type: string
       enum:
