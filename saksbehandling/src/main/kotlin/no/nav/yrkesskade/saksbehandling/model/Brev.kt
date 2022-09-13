@@ -14,11 +14,15 @@ data class Brev(
 
 data class BrevutsendingBestiltHendelse(
     val brev: Brev,
+    val mottaker: Mottaker,
     val metadata: BrevutsendingMetadata
 )
 
+data class Mottaker(
+    val foedselsnummer: String
+)
+
 data class BrevutsendingMetadata(
-    val innkommendeJournalpostId: String,
     val tidspunktBestilt: Instant,
     val navCallId: String
 )
