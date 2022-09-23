@@ -26,3 +26,7 @@ data class BrevutsendingMetadata(
     val tidspunktBestilt: Instant,
     val navCallId: String
 )
+
+data class BrevutsendingUtfoertHendelse(
+    val behandlingId: String
+)
