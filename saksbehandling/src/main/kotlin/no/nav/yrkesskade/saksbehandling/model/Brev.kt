@@ -28,7 +28,7 @@ data class BrevutsendingMetadata(
 )
 
 data class BrevutsendingUtfoertHendelse(
-    val behandlingId: String,
+    val journalpostId: String,
     val metadata: BrevutsendingUtfoertMetadata
 )
 
