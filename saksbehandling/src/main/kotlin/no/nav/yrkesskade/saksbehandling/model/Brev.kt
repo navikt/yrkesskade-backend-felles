@@ -28,5 +28,10 @@ data class BrevutsendingMetadata(
 )
 
 data class BrevutsendingUtfoertHendelse(
-    val behandlingId: String
+    val behandlingId: String,
+    val metadata: BrevutsendingUtfoertMetadata
+)
+
+data class BrevutsendingUtfoertMetadata(
+    val navCallId: String
 )
