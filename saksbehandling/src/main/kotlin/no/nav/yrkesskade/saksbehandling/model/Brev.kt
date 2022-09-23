@@ -13,6 +13,7 @@ data class Brev(
 )
 
 data class BrevutsendingBestiltHendelse(
+    val behandlingId: Long,
     val brev: Brev,
     val mottaker: Mottaker,
     val metadata: BrevutsendingMetadata
@@ -28,6 +29,7 @@ data class BrevutsendingMetadata(
 )
 
 data class BrevutsendingUtfoertHendelse(
+    val behandlingId: Long,
     val journalpostId: String,
     val metadata: BrevutsendingUtfoertMetadata
 )
