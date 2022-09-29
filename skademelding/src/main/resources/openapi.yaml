@@ -218,7 +218,11 @@ components:
         rolletype:
           type: string
           example: arbeidstaker
+<<<<<<< Updated upstream
         tjenesteperiode:
+=======
+        tjenestegjoerendeAvdelingEllerManoever:
+>>>>>>> Stashed changes
           $ref: '#/components/schemas/Periode'
           description: Feltet for tjenesteperiode benyttes i forbindelse med militærtjeneste
         underOrdreOmManoever:
