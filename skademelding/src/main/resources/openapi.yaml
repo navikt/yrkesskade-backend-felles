@@ -218,7 +218,7 @@ components:
         rolletype:
           type: string
           example: arbeidstaker
-        tjenestegjoerendeAvdelingEllerManoever:
+        tjenesteperiodeEllerManoever:
           $ref: '#/components/schemas/Periode'
           description: Feltet for tjenesteperiode benyttes i forbindelse med militærtjeneste
         underOrdreOmManoever:
