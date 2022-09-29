@@ -221,10 +221,14 @@ components:
         tjenesteperiode:
           $ref: '#/components/schemas/Periode'
           description: Feltet for tjenesteperiode benyttes i forbindelse med militærtjeneste
-        tjenestegjoerendeAvdeling:
+        underOrdreOmManoever:
+          type: boolean
+          example: true
+          description: Feltet brukes i forbindelse med militærtjeneste
+        tjenestegjoerendeAvdelingNavnPaaFartoey:
           type: string
           example: Kompani Lauritzen
-          description: Feltet for tjenestegjoerendeAvdeling benyttes i forbindelse med militærtjeneste
+          description: Feltet for tjenestegjoerendeAvdelingNavnPaaFartoey benyttes i forbindelse med militærtjeneste
       nullable: false
     Tid:
       type: object
