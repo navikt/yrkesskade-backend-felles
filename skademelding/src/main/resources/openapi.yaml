@@ -225,10 +225,15 @@ components:
           type: boolean
           example: true
           description: Feltet brukes i forbindelse med militærtjeneste
-        tjenestegjoerendeAvdelingNavnPaaFartoey:
+        navnPaatjenestegjoerendeavdelingEllerFartoeyEllerStudiested:
           type: string
           example: Kompani Lauritzen
-          description: Feltet for tjenestegjoerendeAvdelingNavnPaaFartoey benyttes i forbindelse med militærtjeneste
+          description: Feltet for navnPaatjenestegjoerendeavdelingEllerFartoeyEllerStudiested benyttes i forbindelse med militærtjeneste. Feltet skal beskrive navn på avdeling, fartøy eller studiested.
+        utdanningStart:
+          type: string
+          format: date
+          example: 2022-02-02
+          description: Feltet for utdanningStart benyttes i forbindelse med skademelding for militær lærling eller elev.
       nullable: false
     Tid:
       type: object
