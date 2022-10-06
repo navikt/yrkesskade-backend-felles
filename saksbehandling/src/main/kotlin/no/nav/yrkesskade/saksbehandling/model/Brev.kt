@@ -4,7 +4,7 @@ import no.nav.yrkesskade.saksbehandling.model.pdf.PdfInnholdElement
 import java.time.Instant
 
 data class Brev(
-    val tittel: String,
+    val dokumentkategori: String,
     val innhold: List<PdfInnholdElement>,
 )
 
