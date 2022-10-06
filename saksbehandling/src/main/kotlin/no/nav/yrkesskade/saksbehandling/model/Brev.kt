@@ -10,7 +10,8 @@ data class Brev(
 
 data class BrevutsendingBestiltHendelse(
     val behandlingId: Long,
-    val brev: Brev,
+    val tittel: String,
+    val brevinnhold: List<PdfInnholdElement>,
     val mottaker: Mottaker,
     val metadata: BrevutsendingMetadata
 )
