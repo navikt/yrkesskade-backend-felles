@@ -1,3 +1,5 @@
+Dette repoet er flyttet til https://github.com/navikt/yrkesskade
+
 # yrkesskade-backend-felles
 
 Repository for kode som blir gjenbrukt i flere av våre backend-prosjekter (Kotlin).
