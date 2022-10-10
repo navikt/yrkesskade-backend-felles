@@ -19,7 +19,7 @@ data class BrevutsendingBestiltHendelse(
     val behandlingId: Long,
     val enhet: String,
     val tittel: String,
-    val brevinnhold: List<PdfInnholdElement>,
+    val brevinnhold: Brevinnhold,
     val mottaker: Mottaker,
     val metadata: BrevutsendingMetadata
 )
