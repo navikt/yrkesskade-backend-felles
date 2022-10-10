@@ -5,7 +5,13 @@ import java.time.Instant
 
 data class Brev(
     val dokumentkategori: String,
-    val innhold: List<PdfInnholdElement>,
+    val innhold: Brevinnhold
+)
+
+data class Brevinnhold(
+    val navn: String,
+    val dato: Instant,
+    val tekst: List<PdfInnholdElement>
 )
 
 data class BrevutsendingBestiltHendelse(
