@@ -2,6 +2,7 @@ package no.nav.yrkesskade.saksbehandling.model
 
 import no.nav.yrkesskade.saksbehandling.model.pdf.PdfInnholdElement
 import java.time.Instant
+import java.time.LocalDate
 
 data class Brev(
     val dokumentkategori: String,
@@ -10,7 +11,7 @@ data class Brev(
 
 data class Brevinnhold(
     val navn: String,
-    val dato: Instant,
+    val dato: LocalDate,
     val tekst: List<PdfInnholdElement>
 )
 
